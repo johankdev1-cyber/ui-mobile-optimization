@@ -14,7 +14,7 @@ A full UX audit and mobile-first redesign for an e-commerce store that was losin
 
 ## About
 
-The client's site was built for desktop and never adapted for mobile. Over 60% of their traffic came from phones — but mobile conversions were near zero. This case study walks through the 6 critical issues found in the audit, the redesign decisions made, and the outcome 30 days after launch.
+The client's site was built for desktop and never adapted for mobile. Over 60% of their traffic came from phones, but mobile conversions were near zero. This case study walks through the 6 critical issues found in the audit, the redesign decisions made, and the outcome 30 days after launch.
 
 ---
 
