@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile UI Optimization — Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#f4f2ee;--ink:#1a1814;--mid:#7a776e;--violet:#6c47ff;--lime:#aaee44;--coral:#ff5c3a;--sky:#38c5f5;--border:rgba(0,0,0,0.08);--white:#fff;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 56px;display:flex;justify-content:space-between;align-items:center;background:rgba(244,242,238,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.logo{font-size:16px;font-weight:600;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo span{font-size:11px;padding:3px 8px;background:var(--violet);color:#fff;border-radius:4px;font-weight:500;}
+.nav-tag{font-size:12px;color:var(--mid);}
+.hero{padding:140px 56px 80px;display:flex;flex-direction:column;align-items:flex-start;}
+.case-meta{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;}
+.meta-pill{font-size:11px;padding:5px 12px;border-radius:100px;border:1px solid var(--border);color:var(--mid);background:#fff;}
+.meta-pill.v{background:rgba(108,71,255,0.08);border-color:rgba(108,71,255,0.2);color:var(--violet);}
+h1{font-size:clamp(40px,6vw,72px);font-weight:700;line-height:1.05;letter-spacing:-0.02em;max-width:700px;margin-bottom:24px;}
+h1 em{font-style:normal;color:var(--violet);}
+.hero-desc{font-size:17px;color:var(--mid);line-height:1.75;max-width:540px;margin-bottom:56px;}
+.results-row{display:flex;gap:40px;padding:32px 40px;background:#fff;border-radius:16px;border:1px solid var(--border);flex-wrap:wrap;}
+.result{text-align:center;}
+.result-num{font-size:36px;font-weight:700;letter-spacing:-0.02em;}
+.result-lbl{font-size:12px;color:var(--mid);margin-top:4px;letter-spacing:0.05em;text-transform:uppercase;}
+.rn1{color:var(--violet);}.rn2{color:var(--coral);}.rn3{color:var(--lime);color:#6a9a1a;}.rn4{color:var(--sky);color:#0e8fb5;}
+.compare{padding:80px 56px;border-top:1px solid var(--border);}
+.compare-header{margin-bottom:56px;}
+.sec-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+h2{font-size:clamp(28px,3.5vw,44px);font-weight:700;letter-spacing:-0.02em;line-height:1.1;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.compare-col{}
+.compare-label{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.compare-badge{font-size:11px;font-weight:600;padding:5px 14px;border-radius:100px;}
+.badge-before{background:rgba(255,92,58,0.1);color:var(--coral);}
+.badge-after{background:rgba(108,71,255,0.1);color:var(--violet);}
+.phone-wrap{display:flex;justify-content:center;}
+.phone{width:240px;border-radius:32px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.12);border:8px solid var(--ink);}
+.phone-notch{height:28px;background:var(--ink);display:flex;align-items:center;justify-content:center;}
+.notch-bar{width:60px;height:5px;background:rgba(255,255,255,0.15);border-radius:3px;}
+.phone-screen{background:#fff;}
+.before-screen{background:#f0f0f0;}
+.before-nav-old{background:#003087;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;}
+.before-nav-old .logo-old{font-size:9px;font-weight:700;color:#fff;letter-spacing:0.05em;}
+.before-nav-old .menu-old{display:flex;flex-direction:column;gap:2px;}
+.before-nav-old .menu-old div{width:14px;height:2px;background:#fff;}
+.before-hero-old{background:linear-gradient(#003087,#0052cc);padding:14px 12px;text-align:center;}
+.bho-title{font-size:11px;font-weight:700;color:#fff;margin-bottom:4px;}
+.bho-sub{font-size:6px;color:rgba(255,255,255,0.7);margin-bottom:8px;line-height:1.4;}
+.bho-btn{display:inline-block;background:#ff6600;color:#fff;font-size:6px;padding:4px 8px;font-weight:700;}
+.before-content{padding:10px 12px;}
+.bc-title{font-size:8px;font-weight:700;color:#003087;margin-bottom:8px;}
+.bc-text{font-size:5px;color:#555;line-height:1.5;margin-bottom:8px;}
+.bc-grid-old{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}
+.bco-item{background:#e8e8e8;padding:5px 4px;text-align:center;}
+.bco-img{height:20px;background:#ccc;margin-bottom:3px;border:1px solid #bbb;}
+.bco-lbl{font-size:4.5px;color:#333;}
+.bco-price{font-size:5px;font-weight:700;color:#003087;}
+.before-footer-old{background:#003087;padding:8px 12px;}
+.bfo-links{display:flex;flex-wrap:wrap;gap:3px;}
+.bfo-link{font-size:4.5px;color:rgba(255,255,255,0.6);padding:2px 4px;}
+.after-screen{background:#fff;}
+.after-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid #f5f5f5;}
+.after-logo{font-size:11px;font-weight:700;color:#111;letter-spacing:-0.02em;}
+.after-icons{display:flex;gap:10px;align-items:center;}
+.after-icon{width:20px;height:20px;background:#f5f5f5;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.after-search{flex:1;margin:0 10px;background:#f5f5f5;border-radius:20px;height:28px;display:flex;align-items:center;padding:0 10px;}
+.after-search span{font-size:6px;color:#aaa;}
+.after-hero{padding:16px 14px 10px;}
+.ah-tag{font-size:6px;font-weight:600;color:var(--violet);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px;}
+.ah-title{font-size:15px;font-weight:700;color:#111;line-height:1.15;letter-spacing:-0.02em;margin-bottom:4px;}
+.ah-sub{font-size:6px;color:#888;line-height:1.5;margin-bottom:10px;}
+.ah-btns{display:flex;gap:6px;}
+.ah-btn1{background:#111;color:#fff;font-size:6px;padding:6px 12px;border-radius:20px;font-weight:600;}
+.ah-btn2{border:1px solid #ddd;color:#555;font-size:6px;padding:6px 12px;border-radius:20px;}
+.after-products{padding:10px 14px 14px;}
+.ap-label{font-size:6px;font-weight:600;color:#111;margin-bottom:8px;letter-spacing:0.05em;text-transform:uppercase;}
+.ap-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.ap-card{border-radius:8px;overflow:hidden;border:1px solid #f0f0f0;}
+.ap-img{height:40px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.ap-info{padding:5px 6px;}
+.ap-name{font-size:6px;font-weight:600;color:#111;margin-bottom:2px;}
+.ap-price{font-size:6px;color:var(--violet);font-weight:700;}
+.after-cta{margin:0 14px 14px;background:linear-gradient(135deg,var(--violet),#9b87ff);border-radius:10px;padding:12px;text-align:center;}
+.ac-title{font-size:8px;font-weight:700;color:#fff;margin-bottom:3px;}
+.ac-sub{font-size:5px;color:rgba(255,255,255,0.7);margin-bottom:6px;}
+.ac-btn{display:inline-block;background:#fff;color:var(--violet);font-size:6px;padding:4px 12px;border-radius:20px;font-weight:700;}
+.issues{padding:80px 56px;background:var(--ink);color:#fff;border-top:1px solid rgba(255,255,255,0.06);}
+.issues-header{margin-bottom:56px;}
+.issues h2{color:#fff;}
+.issues .sec-label{color:rgba(255,255,255,0.35);}
+.issues-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.issue{padding:32px 28px;border-radius:16px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.03);transition:background .3s;}
+.issue:hover{background:rgba(255,255,255,0.06);}
+.issue-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.ii1{background:rgba(255,92,58,0.15);}.ii2{background:rgba(56,197,245,0.12);}.ii3{background:rgba(170,238,68,0.12);}
+.ii4{background:rgba(108,71,255,0.15);}.ii5{background:rgba(255,92,58,0.12);}.ii6{background:rgba(56,197,245,0.15);}
+.issue-title{font-size:16px;font-weight:500;color:#fff;margin-bottom:10px;}
+.issue-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;}
+.issue-fix{font-size:12px;color:var(--lime);margin-top:12px;font-weight:500;}
+.takeaway{padding:80px 56px;border-top:1px solid var(--border);}
+.take-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.take-text{}
+.take-text h2{margin-bottom:24px;}
+.take-text p{font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:16px;}
+.take-cta{display:flex;gap:12px;margin-top:32px;}
+.btn-dark{background:var(--ink);color:#fff;padding:13px 28px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;transition:background .2s;}
+.btn-dark:hover{background:var(--violet);}
+.btn-light{border:1.5px solid var(--border);color:var(--ink);padding:13px 28px;border-radius:100px;font-size:13px;text-decoration:none;transition:border-color .2s;}
+.btn-light:hover{border-color:var(--ink);}
+.metrics-list{display:flex;flex-direction:column;gap:16px;}
+.metric{display:grid;grid-template-columns:160px 1fr 60px;gap:16px;align-items:center;}
+.metric-lbl{font-size:13px;color:var(--mid);}
+.metric-bar-bg{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.metric-bar-fill{height:100%;border-radius:3px;}
+.metric-val{font-size:13px;font-weight:600;text-align:right;}
+footer{padding:32px 56px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);}
+.fl{font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.fl span{font-size:11px;padding:3px 8px;background:var(--violet);color:#fff;border-radius:4px;}
+.fcopy{font-size:12px;color:var(--mid);}
+.fi{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s;}
+.fi.in{opacity:1;transform:none;}
+@media(max-width:900px){
+  nav{padding:18px 24px;}
+  .hero{padding:100px 24px 60px;}
+  .results-row{gap:24px;padding:24px;}
+  .compare,.issues,.takeaway{padding:60px 24px;}
+  .compare-grid,.take-grid{grid-template-columns:1fr;}
+  .issues-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:12px;padding:24px;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="logo">Johan K <span>Case Study</span></a>
+  <span class="nav-tag">UI/UX · Mobile Optimization</span>
+</nav>
+
+<section class="hero">
+  <div class="case-meta">
+    <span class="meta-pill v">Mobile Optimization</span>
+    <span class="meta-pill">UX Audit</span>
+    <span class="meta-pill">Responsive Design</span>
+    <span class="meta-pill">E-Commerce</span>
+  </div>
+  <h1>Fixing a mobile UI that was <em>losing</em> customers</h1>
+  <p class="hero-desc">A full mobile UX audit and redesign for a mid-size e-commerce store. The old site was built for desktop and never adapted. Here's what we changed — and what happened next.</p>
+  <div class="results-row fi">
+    <div class="result"><div class="result-num rn1">+68%</div><div class="result-lbl">Mobile conversion</div></div>
+    <div class="result"><div class="result-num rn2">-54%</div><div class="result-lbl">Bounce rate</div></div>
+    <div class="result"><div class="result-num rn3">3.1s</div><div class="result-lbl">Faster load time</div></div>
+    <div class="result"><div class="result-num rn4">5★</div><div class="result-lbl">Client rating</div></div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="compare-header fi">
+    <div class="sec-label">Side by side</div>
+    <h2>Before vs. After</h2>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-col fi">
+      <div class="compare-label"><span class="compare-badge badge-before">Before</span><span style="font-size:13px;color:var(--mid)">Desktop site crammed into mobile</span></div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"><div class="notch-bar"></div></div>
+          <div class="before-screen">
+            <div class="before-nav-old">
+              <div class="logo-old">SHOPMAX</div>
+              <div class="menu-old"><div></div><div></div><div></div></div>
+            </div>
+            <div class="before-hero-old">
+              <div class="bho-title">SUMMER SALE — UP TO 70% OFF</div>
+              <div class="bho-sub">Shop our huge range of products across all categories</div>
+              <div class="bho-btn">SHOP NOW</div>
+            </div>
+            <div class="before-content">
+              <div class="bc-title">FEATURED PRODUCTS</div>
+              <div class="bc-text">Browse our wide selection of quality products at unbeatable prices. New arrivals every week.</div>
+              <div class="bc-grid-old">
+                <div class="bco-item"><div class="bco-img"></div><div class="bco-lbl">Product Name That Is Too Long</div><div class="bco-price">$29.99</div></div>
+                <div class="bco-item"><div class="bco-img"></div><div class="bco-lbl">Another Product</div><div class="bco-price">$49.99</div></div>
+                <div class="bco-item"><div class="bco-img"></div><div class="bco-lbl">Item Three</div><div class="bco-price">$19.99</div></div>
+              </div>
+            </div>
+            <div class="before-footer-old">
+              <div class="bfo-links"><span class="bfo-link">About</span><span class="bfo-link">Contact</span><span class="bfo-link">Returns</span><span class="bfo-link">Privacy</span><span class="bfo-link">Terms</span><span class="bfo-link">Sitemap</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="compare-col fi">
+      <div class="compare-label"><span class="compare-badge badge-after">After</span><span style="font-size:13px;color:var(--mid)">Rebuilt mobile-first from scratch</span></div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"><div class="notch-bar"></div></div>
+          <div class="after-screen">
+            <div class="after-nav">
+              <div class="after-logo">ShopMax</div>
+              <div class="after-search"><span>Search products...</span></div>
+              <div class="after-icon">🛒</div>
+            </div>
+            <div class="after-hero">
+              <div class="ah-tag">Summer Sale</div>
+              <div class="ah-title">Up to 70%<br>off everything</div>
+              <div class="ah-sub">Curated picks, fast delivery, easy returns.</div>
+              <div class="ah-btns"><div class="ah-btn1">Shop now</div><div class="ah-btn2">See deals</div></div>
+            </div>
+            <div class="after-products">
+              <div class="ap-label">Best Sellers</div>
+              <div class="ap-grid">
+                <div class="ap-card"><div class="ap-img" style="background:#fef9ee">👟</div><div class="ap-info"><div class="ap-name">Classic Sneaker</div><div class="ap-price">$49.99</div></div></div>
+                <div class="ap-card"><div class="ap-img" style="background:#f0f9ff">🎒</div><div class="ap-info"><div class="ap-name">Canvas Backpack</div><div class="ap-price">$34.99</div></div></div>
+                <div class="ap-card"><div class="ap-img" style="background:#f9f0ff">🕶️</div><div class="ap-info"><div class="ap-name">Retro Shades</div><div class="ap-price">$24.99</div></div></div>
+                <div class="ap-card"><div class="ap-img" style="background:#f0fff4">🧢</div><div class="ap-info"><div class="ap-name">Logo Cap</div><div class="ap-price">$19.99</div></div></div>
+              </div>
+            </div>
+            <div class="after-cta">
+              <div class="ac-title">Join & save 15%</div>
+              <div class="ac-sub">Free shipping on your first order</div>
+              <div class="ac-btn">Create account</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="issues">
+  <div class="issues-header fi">
+    <div class="sec-label">The audit</div>
+    <h2>6 things that were broken</h2>
+  </div>
+  <div class="issues-grid">
+    <div class="issue fi"><div class="issue-icon ii1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff5c3a" stroke-width="2.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div class="issue-title">No mobile layout</div><div class="issue-desc">The desktop grid was shrinking down instead of reflowing. Three-column grids became illegible at 375px.</div><div class="issue-fix">→ Full mobile-first rebuild with 2-column max</div></div>
+    <div class="issue fi"><div class="issue-icon ii2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38c5f5" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="issue-title">No search on mobile</div><div class="issue-desc">The search bar was hidden behind a toggle that was 8px tall. Untappable on any real device.</div><div class="issue-fix">→ Persistent, tap-friendly search in the nav</div></div>
+    <div class="issue fi"><div class="issue-icon ii3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6a9a1a" stroke-width="2.5" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="issue-title">Slow load (6.4s)</div><div class="issue-desc">Uncompressed images, 14 font weights loaded, render-blocking scripts. Painful on mobile data.</div><div class="issue-fix">→ Down to 2.1s with lazy loading + cleanup</div></div>
+    <div class="issue fi"><div class="issue-icon ii4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6c47ff" stroke-width="2.5" stroke-linecap="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></div><div class="issue-title">Tiny tap targets</div><div class="issue-desc">Add to cart buttons were 28px tall. Apple guidelines require 44px minimum. Users were mis-tapping constantly.</div><div class="issue-fix">→ All interactive elements at 44px+ height</div></div>
+    <div class="issue fi"><div class="issue-icon ii5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff5c3a" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="issue-title">Broken checkout</div><div class="issue-desc">The address form used fixed widths that overflowed on mobile. The payment step was completely broken on iOS Safari.</div><div class="issue-fix">→ Rebuilt with fluid inputs and iOS keyboard handling</div></div>
+    <div class="issue fi"><div class="issue-icon ii6"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38c5f5" stroke-width="2.5" stroke-linecap="round"><path d="M1 6s1-3 5-3 5 6 9 6 5-3 5-3"/><path d="M1 18s1-3 5-3 5 6 9 6 5-3 5-3"/></svg></div><div class="issue-title">No hierarchy on mobile</div><div class="issue-desc">Every element felt the same size. No clear path for the eye to follow. Users didn't know where to look or tap first.</div><div class="issue-fix">→ Clear type scale, white space, and visual hierarchy</div></div>
+  </div>
+</section>
+
+<section class="takeaway">
+  <div class="take-grid">
+    <div class="take-text fi">
+      <div class="sec-label">Results</div>
+      <h2>What changed after launch</h2>
+      <p>Within 30 days of the redesigned mobile experience going live, the client saw a dramatic shift in their mobile metrics. What was previously their worst-performing channel became their best.</p>
+      <p>The improvements weren't from adding features — they came from removing friction and respecting how people actually use their phones.</p>
+      <div class="take-cta">
+        <a href="https://johank.netlify.app/#contact" class="btn-dark">Work with me</a>
+        <a href="https://johank.netlify.app/#portfolio" class="btn-light">See more work</a>
+      </div>
+    </div>
+    <div class="metrics-list fi">
+      <div class="metric"><span class="metric-lbl">Mobile conversion</span><div class="metric-bar-bg"><div class="metric-bar-fill" style="width:88%;background:var(--violet)"></div></div><span class="metric-val" style="color:var(--violet)">+68%</span></div>
+      <div class="metric"><span class="metric-lbl">Bounce rate</span><div class="metric-bar-bg"><div class="metric-bar-fill" style="width:74%;background:var(--coral)"></div></div><span class="metric-val" style="color:var(--coral)">-54%</span></div>
+      <div class="metric"><span class="metric-lbl">Session duration</span><div class="metric-bar-bg"><div class="metric-bar-fill" style="width:62%;background:var(--sky);background:#0e8fb5"></div></div><span class="metric-val" style="color:#0e8fb5">+41%</span></div>
+      <div class="metric"><span class="metric-lbl">Cart completion</span><div class="metric-bar-bg"><div class="metric-bar-fill" style="width:55%;background:#6a9a1a"></div></div><span class="metric-val" style="color:#6a9a1a">+35%</span></div>
+      <div class="metric"><span class="metric-lbl">Load time</span><div class="metric-bar-bg"><div class="metric-bar-fill" style="width:80%;background:var(--violet)"></div></div><span class="metric-val" style="color:var(--violet)">-52%</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="https://johank.netlify.app" class="fl">Johan K <span>Portfolio</span></a>
+  <span class="fcopy">© 2026 Johan K. All rights reserved.</span>
+</footer>
+
+<script>
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:0.08});
+document.querySelectorAll('.fi').forEach(function(el){obs.observe(el);});
+</script>
+</body>
+</html>
